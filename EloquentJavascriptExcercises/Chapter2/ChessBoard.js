@@ -1,28 +1,28 @@
 var size = 8;
 var chessBoard = "";
-var startCharacter = " ";
+var startCharacterForRow = " ";
 for (var row = 0; row < size; row++)
 {
-	var current = startCharacter;
+	var currentChar = startCharacterForRow;
 	for (var col = 0; col < size; col++)
 	{
-		chessBoard += current;
-		if (current == " ")
+		chessBoard += currentChar;
+		if (currentChar == " ")
 		{
-			current = "#";
+			currentChar = "#";
 		}
 		else
 		{
-			current = " ";
+			currentChar = " ";
 		}
 	}
-	if (startCharacter == " ")
+	if (startCharacterForRow == " ")
 	{
-		startCharacter = "#";
+		startCharacterForRow = "#";
 	}
 	else
 	{
-		startCharacter = " ";
+		startCharacterForRow = " ";
 	}
 	chessBoard += "\n";
 }
