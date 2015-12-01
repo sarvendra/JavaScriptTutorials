@@ -16,6 +16,16 @@ var arrayToList = function(arr)
 	return list;
 }
 
+var arrayToListRecur = function(arr)
+{
+	if (arr.length == 0)
+	{
+		return null;
+	}
+	var list = arrayToListRecur(arr.slice(1));
+	return prepend(arr[0], list);
+}
+
 var listToArray = function(list)
 {
 	var arr = [];
@@ -49,6 +59,8 @@ var nth = function(list, n)
 		return undefined; 	
 	}
 }
+
+
 
 var nthRecur = function(list, n)
 {
