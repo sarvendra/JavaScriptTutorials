@@ -33,19 +33,17 @@ var compareDecreasingNumbers = function(num1, num2)
 var range = function(start, end)
 {
 	var step = 1;
+	var arr = [];
+	var compare = compareIncreasingNumbers;
+	if (start > end)
+	{
+		compare = compareDecreasingNumbers;
+		step = -1;
+	}
+
 	if (arguments.length == 3)
 	{
 		step = arguments[2];
-	}
-	var arr = [];
-	var compare;
-	if (start < end)
-	{
-		compare = compareIncreasingNumbers;
-	}
-	else
-	{
-		compare = compareDecreasingNumbers;
 	}
 	
 	for (var index = start; compare(index, end); index += step)
