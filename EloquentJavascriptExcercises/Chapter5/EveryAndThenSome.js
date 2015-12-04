@@ -1,25 +1,19 @@
-var every = function(array, predicate)
-{
+var every = function(array, predicate){
 	var isTrue = true;
-	for (var i = 0; i < array.length; i++)
-	{
+	for (var i = 0; i < array.length; i++){
 		isTrue = isTrue && predicate(array[i]);
-		if (!isTrue)
-		{
+		if (!isTrue){
 			break;
 		}
 	}
 	return isTrue;
 }
 
-var some = function(array, predicate)
-{
+var some = function(array, predicate){
 	var isTrue = false;
-	for (var i = 0; i < array.length; i++)
-	{
+	for (var i = 0; i < array.length; i++){
 		isTrue = isTrue || predicate(array[i]);
-		if (isTrue)
-		{
+		if (isTrue){
 			break;
 		}
 	}
