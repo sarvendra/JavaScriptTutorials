@@ -40,8 +40,8 @@
 //   '{"name": "Jacobus Bernardus van Brussel", "sex": "m", "born": 1736, "died": 1809, "father": "Jan van Brussel", "mother": "Elisabeth Haverbeke"}'
 // ].join(",\n  ") + "\n]";
 
-// var ancestry = JSON.parse(ANCESTRY_FILE);
-// console.log(ancestry.length);
+var ancestry = JSON.parse(ANCESTRY_FILE);
+console.log(ancestry.length);
 
 var average = function(array)
 {
@@ -112,9 +112,11 @@ var avgAgePerCentury = function()
 {
   var groups = groupBy(ancestry, getGroup);
   console.log(groups);
-  for(var group in groups)
+  var keys = Object.keys(groups);
+  console.log(keys);
+  keys.forEach(function(group)
   {
-    console.log(group + " : " + average(computeAge(groups[group])));
-  }
+    console.log(group + " : " + average(computeAge(groups[group])));      
+  });
 }
 avgAgePerCentury();
