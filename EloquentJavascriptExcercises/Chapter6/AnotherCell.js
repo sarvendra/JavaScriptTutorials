@@ -8,14 +8,17 @@ function repeat(string, times) {
 function TextCell(text) {
   this.text = text.split("\n");
 }
+
 TextCell.prototype.minWidth = function() {
   return this.text.reduce(function(width, line) {
     return Math.max(width, line.length);
   }, 0);
 };
+
 TextCell.prototype.minHeight = function() {
   return this.text.length;
 };
+
 TextCell.prototype.draw = function(width, height) {
   var result = [];
   for (var i = 0; i < height; i++) {
@@ -40,7 +43,6 @@ StretchCell.prototype.minWidth = function(){
 }
 
 StretchCell.prototype.draw = function(width, height){
-  // line + repeat(" ", width - line.length)
   return this.inner.draw(this.minWidth(), this.minHeight());
 }
 
