@@ -6,8 +6,7 @@ function Tiger() {
 
 Tiger.prototype.act = function(view) {
   var space = view.find(" ");
-  var critter = view.find("@");
-  if ((space && this.energy > 60) || (this.energy > 50 && space && critter)){
+  if (space && this.energy > 90){
     return {type: "reproduce", direction: space};
   }
   var smartPlantEater = view.find("O");
