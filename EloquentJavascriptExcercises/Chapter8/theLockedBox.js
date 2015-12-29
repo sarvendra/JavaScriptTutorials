@@ -38,7 +38,7 @@ function withBoxUnlocked(body) {
 		box.unlock();
 		body();
 	} finally {
-		if (isLocked){
+		if (isLocked) {
 			box.lock();
 		}
 	}
