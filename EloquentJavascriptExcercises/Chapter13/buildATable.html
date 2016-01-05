@@ -1,0 +1,35 @@
+<style>
+  /* Defines a cleaner look for tables */
+  table  { border-collapse: collapse; }
+  td, th { border: 1px solid black; padding: 3px 8px; }
+  th     { text-align: left; }
+  td 	 { text-align: right; }
+</style>
+
+<script>
+  function buildTable(data) {
+  	var tableNode = document.createElement("table");
+  	// header
+    var headers = Object.keys(data[0]);
+    var trNode = document.createElement("tr");
+    headers.forEach(function(prop){
+		var thNode = document.createElement("th");
+		var textNode = document.createTextNode(prop);
+		thNode.appendChild(textNode);
+		trNode.appendChild(thNode);
+    });
+    tableNode.appendChild(trNode);
+    // data
+    data.forEach(function(rowData){
+	    trNode = document.createElement("tr");
+		headers.forEach(function(key){
+			var tdNode = document.createElement("td");
+			var textNode = document.createTextNode(rowData[key]);
+			tdNode.appendChild(textNode);
+			trNode.appendChild(tdNode);
+		});
+		tableNode.appendChild(trNode);
+    });
+    return tableNode;
+  }
+</script>
