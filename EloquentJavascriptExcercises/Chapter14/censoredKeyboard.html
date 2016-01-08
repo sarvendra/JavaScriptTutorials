@@ -1,0 +1,19 @@
+<input type="text">
+<script>
+  var field = document.querySelector("input");
+  field.addEventListener("keypress", function(event){
+  	if (isForbiddenInput(event.charCode)){
+  		event.preventDefault();
+  	}
+  });
+
+  function isForbiddenInput(charCode){
+  	var forbiddenLetters = ['W', "Q", "X"];
+  	for (var index in forbiddenLetters){
+  		if (String.fromCharCode(charCode) === forbiddenLetters[index]){
+  			return true;
+  		}
+  	}
+  	return false;
+  }
+</script>
