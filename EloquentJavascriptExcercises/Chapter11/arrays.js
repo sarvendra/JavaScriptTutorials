@@ -5,3 +5,7 @@ topEnv["array"] = function(){
 topEnv["length"] = function(array){
   return array.length;
 };
+
+topEnv["element"] = function(array, n){
+  return array[n];
+};
