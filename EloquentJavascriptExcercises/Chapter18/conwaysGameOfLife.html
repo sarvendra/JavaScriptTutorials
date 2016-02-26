@@ -2,7 +2,7 @@
 <button id="next">Next generation</button>
 
 <script>
-  var size = 3;
+  var size = 5;
   var div = document.querySelector("#grid");
   var oldGrid = new Array(size);
   var newGrid = new Array(size);
@@ -40,7 +40,7 @@
             if (i+y < 0 || i + y >= size || j + x < 0 || j+x > size) {
               continue;
             }
-            if (oldGrid[i + y][j + x]) {
+            if (!(x === 0 && y === 0) && oldGrid[i + y][j + x]) {
               live++;
             }
           }
@@ -50,7 +50,7 @@
             newGrid[i][j].checked = 1;
           }
         } else {
-          if (live < 3 || live > 4) {
+          if (live < 2 || live > 3) {
             newGrid[i][j].checked = 0;
           }
         }
