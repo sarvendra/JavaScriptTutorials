@@ -1,0 +1,47 @@
+<div id="grid"></div>
+<button id="next">Next generation</button>
+
+<script src="conwaysGameOfLife.js"></script>
+
+<script>
+	var size = 3;
+	var div = document.querySelector("#grid");
+
+	var game = new Game(size);
+
+	function createCell(i,j) {
+		var cell = document.createElement("input");
+		cell.type = "checkbox";
+		cell.checked = game.getCell(j, i);
+		cell.addEventListener("change", function(event) {
+			var rowDiv = cell.parentNode;
+			var col = Array.prototype.indexOf.call(rowDiv.children, cell);
+			var grid = rowDiv.parentNode;
+			var row = Array.prototype.indexOf.call(grid.children, rowDiv);
+			console.log(cell.value);
+			game.setCell(col,row, cell.checked);
+		});
+		return cell;
+	}
+
+	for (i = 0; i < size; i++) {
+   		var rowDiv = document.createElement("div");
+   		div.appendChild(rowDiv);
+   		for (j = 0; j < size; j++) {
+   			var cell = createCell(i,j);
+	        rowDiv.appendChild(cell);
+   		}
+   	}
+   	var next = document.querySelector("#next");
+   	next.addEventListener("click", function(event) {
+		game.turn();
+		for (i = 0; i < size; i++) {
+			for (j = 0; j < size; j++) {
+				var rowDiv = div.childNodes[i];
+				var cell = rowDiv.childNodes[j];
+				cell.checked = game.getCell(j, i);
+			}
+		}
+   	});
+
+</script>

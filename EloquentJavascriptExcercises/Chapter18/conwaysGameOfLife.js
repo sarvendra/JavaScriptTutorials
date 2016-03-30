@@ -3,11 +3,11 @@ function Game(size) {
   this.newGrid = new Array(size);
   var i, j;
   for (i = 0; i < size; i++) {
-      oldGrid[i] = new Array(size);
-      newGrid[i] = new Array(size);
+      this.oldGrid[i] = new Array(size);
+      this.newGrid[i] = new Array(size);
       for (j = 0; j < size; j++) {
         var value = Math.floor(Math.random() + 0.5);
-        newGrid[i][j] = value;
+        this.newGrid[i][j] = value;
       }
   }
 }
@@ -16,7 +16,7 @@ Game.prototype.turn = function() {
   // copy to oldgrid
   for (i = 0; i < size; i++) {
     for (j = 0; j < size; j++) {
-      oldGrid[i][j] = newGrid[i][j].checked;
+      this.oldGrid[i][j] = this.newGrid[i][j];
     }
   }
   for (i = 0; i < size; i++) {
@@ -28,18 +28,18 @@ Game.prototype.turn = function() {
           if (i+y < 0 || i + y >= size || j + x < 0 || j+x > size) {
             continue;
           }
-          if (!(x === 0 && y === 0) && oldGrid[i + y][j + x]) {
+          if (!(x === 0 && y === 0) && this.oldGrid[i + y][j + x]) {
             live++;
           }
         }
       }
-      if (!newGrid[i][j]) {
+      if (!this.newGrid[i][j]) {
         if (live === 3) {
-          newGrid[i][j] = 1;
+          this.newGrid[i][j] = 1;
         }
       } else {
         if (live < 2 || live > 3) {
-          newGrid[i][j] = 0;
+          this.newGrid[i][j] = 0;
         }
       }
     }
