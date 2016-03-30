@@ -1,5 +1,11 @@
+<style>
+  .selected {
+    background-color: blue; /* for example blue or #00f*/ 
+  }
+</style>
+
 <input type="text" id="field">
-<div id="suggestions" style="cursor: pointer"></div>
+<div id="suggestions" style="cursor: pointer;width:300px"></div>
 
 <script>
   // Builds up an array with global variable names, like
@@ -8,25 +14,59 @@
   for (var name in window)
     terms.push(name);
 
+  var selectedDivIndex = -1;
+
+
+  function onDivSelected() {
+    var totalChild = suggestions.getElementsByTagName('div').length;
+    if (totalChild > 0) {
+      if (selectedDivIndex < -1 || selectedDivIndex >= totalChild) {
+        selectedDivIndex = -1;
+      }
+      if (selectedDivIndex > -1) {
+        for (var index = 0; index < totalChild; index++) {
+          suggestions.childNodes[index].className = "";
+        }
+        suggestions.childNodes[selectedDivIndex].className += " selected";
+        input.value = suggestions.childNodes[selectedDivIndex].textContent;
+      }
+    }
+  }
+
   // Your code here.
-  var select = document.createElement("select");
-  var div = document.querySelector("#suggestions");
-  div.appendChild(select);
+  var suggestions = document.querySelector("#suggestions");
   var input = document.querySelector("#field");
+  input.addEventListener("keydown", function(event) {
+    if (event.keyCode === 38) {
+      selectedDivIndex--;
+      onDivSelected();
+    }
+    else if (event.keyCode === 40) {
+      selectedDivIndex++;
+      onDivSelected();
+    }
+    else if (event.keyCode === 13) {
+      suggestions.innerHTML = "";
+    }
+  });
   input.addEventListener("input", function(event) {
-	while (select.firstChild) {
-	    select.removeChild(select.firstChild);
-	}
+    selectedDivIndex = -1;
   	var text = input.value;
-  	terms.forEach(function(name) {
-  		if (name.lastIndexOf(text,0) === 0) {
-			var option = document.createElement("option");
-			option.textContent = name;
-			select.appendChild(option);
-  		}
-  	});
-  	select.addEventListener("change", function(event) {
-  		input.value = select.value;
-  	});
+    suggestions.innerHTML = "";
+    if (text !== null && text !== "") {
+      var tabindex = 1;
+      terms.forEach(function(name) {
+        if (name.lastIndexOf(text,0) === 0) {
+          var childDiv = document.createElement("div");
+          childDiv.tabIndex = tabindex++;
+          childDiv.textContent = name;
+          suggestions.appendChild(childDiv);
+          childDiv.addEventListener("click", function(event) {
+            input.value = childDiv.textContent;
+            suggestions.innerHTML = "";
+          });
+        }
+      });
+    }
   });
 </script>
